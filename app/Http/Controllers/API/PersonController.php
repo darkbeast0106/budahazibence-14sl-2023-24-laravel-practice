@@ -14,6 +14,7 @@ class PersonController extends Controller
      */
     public function index()
     {
+        //return Person::all();
         $people = Person::all();
         return response()->json($people);
     }
@@ -23,7 +24,12 @@ class PersonController extends Controller
      */
     public function store(StorePersonRequest $request)
     {
-        //
+        //return Person::create($request->all());
+        $person = new Person();
+        $person->fill($request->all());
+        // $person->name = $request->name;
+        $person->save();
+        return response()->json($person, 201);
     }
 
     /**
