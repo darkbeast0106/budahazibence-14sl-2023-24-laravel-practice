@@ -37,7 +37,11 @@ class PersonController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $person = Person::find($id);
+        if (is_null($person)) {
+            return response()->json(["message" => "Person not found with id: $id"], 404);
+        }
+        return $person;
     }
 
     /**
